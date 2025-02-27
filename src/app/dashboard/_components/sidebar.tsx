@@ -12,7 +12,7 @@ export function Sidebar() {
   }
 
   return (
-    <div className="hidden md:flex flex-col w-64 border-r bg-muted/40 min-h-screen">
+    <div className="hidden md:flex flex-col w-64 border-r bg-[#F9FBFD] min-h-screen">
       <div className="flex h-14 items-center border-b px-4">
         <Link href="/dashboard" className="flex items-center gap-2 font-semibold">
           <Zap className="h-5 w-5" />
