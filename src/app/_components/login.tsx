@@ -20,10 +20,13 @@ import { LoginProps, LoginSchema } from "@/lib/validators";
 import { login } from "@/service/auth/authService";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 export function LoginForm() {
+  const router = useRouter();
+
   const form = useForm<LoginProps>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -35,6 +38,7 @@ export function LoginForm() {
   async function onSubmit(data: LoginProps) {
     try {
       await login(data);
+      router.push("/dashboard");
     } catch (error) {
       toast.error("Erro no Login", {
       description: `${error}`,
