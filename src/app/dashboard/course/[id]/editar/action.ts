@@ -1,13 +1,7 @@
-import { CourseDataProps } from "@/lib/validators"
+import { CourseDataProps } from "@/lib/validators";
+import { CourseService } from "@/service/course/CourseService";
 
-export async function UpdateCourseInfo(data: CourseDataProps) {
-  const response = await fetch(`https://fakestoreapi.com/products/${data.id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  })
-
-  const updatedCourse = await response.json()
-
-  return updatedCourse
+export async function UpdateCourseInfo(data: CourseDataProps): Promise<CourseDataProps> {
+  const courseService = new CourseService();
+  return await courseService.updateCourse(data);
 }
