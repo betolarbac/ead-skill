@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
+  ArrowUpDown,
   ChevronLeft,
   ChevronRight,
   Eye,
@@ -89,12 +90,28 @@ export default function CourseData({ data }: CourseData) {
     },
     {
       accessorKey: "price",
-      header: "Preço",
-      cell: ({ row }) => (
-        <div className="capitalize font-medium px-2 py-4">
-          {row.getValue("price")}
-        </div>
-      ),
+      header: ({ column }) => {
+        return (
+          <Button
+            className="cursor-pointer"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Preço
+            <ArrowUpDown />
+          </Button>
+        );
+      },
+      cell: ({ row }) => {
+        const price = parseFloat(row.getValue("price"));
+
+        const formatted = new Intl.NumberFormat("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        }).format(price);
+
+        return <div className=" font-medium px-2 py-4">{formatted}</div>;
+      },
     },
     {
       accessorKey: "rating",
@@ -187,7 +204,11 @@ export default function CourseData({ data }: CourseData) {
           value={
             (table.getColumn("category")?.getFilterValue() as string) ?? ""
           }
-          onValueChange={(e) => table.getColumn("category")?.setFilterValue(e === "all" ? undefined : e)}
+          onValueChange={(e) =>
+            table
+              .getColumn("category")
+              ?.setFilterValue(e === "all" ? undefined : e)
+          }
         >
           <SelectTrigger className="p-2 border rounded-sm w-auto cursor-pointer gap-4">
             <SelectValue placeholder="Selecione uma Categoria" />
