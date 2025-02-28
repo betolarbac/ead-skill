@@ -1,11 +1,12 @@
-"use client"
+"use client";
 import { Button } from "@/components/ui/button";
 import { CourseDataProps } from "@/lib/validators";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown,  Pencil, Zap } from "lucide-react";
+import { ArrowUpDown, Zap } from "lucide-react";
 import Image from "next/image";
 import DetailsButton from "./detailsButton";
 import { DeleteCourse } from "./deleteCourse";
+import EditButton from "./editButton";
 
 export const columnsData: ColumnDef<CourseDataProps>[] = [
   {
@@ -82,10 +83,8 @@ export const columnsData: ColumnDef<CourseDataProps>[] = [
     accessorKey: "rating",
     header: "Avaliação",
     sortingFn: (rowA, rowB, columnId) => {
-      const ratingA =
-        (rowA.getValue(columnId) as { rate: number })?.rate || 0;
-      const ratingB =
-        (rowB.getValue(columnId) as { rate: number })?.rate || 0;
+      const ratingA = (rowA.getValue(columnId) as { rate: number })?.rate || 0;
+      const ratingB = (rowB.getValue(columnId) as { rate: number })?.rate || 0;
       return ratingA - ratingB;
     },
     cell: ({ row }) => {
@@ -117,16 +116,14 @@ export const columnsData: ColumnDef<CourseDataProps>[] = [
   {
     id: "actions",
     header: () => <div className="text-end pr-2">Ações</div>,
-    cell: ({row}) => {
+    cell: ({ row }) => {
       return (
         <div className="flex justify-end gap-2">
           <DetailsButton id={Number(row.original.id)} />
-          <Button variant="outline" size="icon" className="cursor-pointer">
-            <Pencil className="h-4 w-4" />
-          </Button>
+          <EditButton id={Number(row.original.id)} />
           <DeleteCourse id={Number(row.original.id)} />
         </div>
       );
     },
   },
-]
+];
