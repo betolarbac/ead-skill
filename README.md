@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+<h1 align="center">
+  Ead Skill
+</h1>
 
+Projeto desenvolvido para gerenciar cursos com opções de CRUD e testes unitários para garantir que qualquer alteração não comprometa o funcionamento completo do projeto.
+
+
+![Rocket Redis](https://ik.imagekit.io/lt1yvcbdq/localhost_3000_dashboard(1440).png?updatedAt=1740763216323)
+
+
+## Instalar e rodar o projeto
+
+Rodar o Ead-Skill em sua máquina local é uma tarefa extremamente simples.
+
+### Dependências globais
+
+Você precisa ter uma principais dependências instaladas:
+
+- Node.js LTS v20 (ou qualquer versão superior)
+
+## Rodando localmente
+Clone o projeto
+```bash
+git clone https://github.com/betolarbac/ead-skill.git
+```
+Entre no diretório do projeto
+```bash
+cd ead-skill
+```
+Instale as dependências
+```bash
+npm install
+```
+Inicie o servidor
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+ Login
+```user
+johnd
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```password:
+ m38rmF$
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Rodar os testes
 
-## Learn More
+Há várias formas de rodar os testes dependendo do que você deseja fazer, mas o primeiro passo antes de fazer qualquer alteração no projeto é rodar os testes de forma geral para se certificar que tudo está passando como esperado. O comando abaixo irá rodar todos os serviços necessários, rodar os testes.
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm test
+```
+### Stack utilizada
+**Front-end:** Next, TailwindCSS, React-hook-form, shadcnUI, zod
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Back-end** [Fake Store API](https://fakestoreapi.com/),
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Teste** Jest
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Figma
+ 
+[Figma do projeto](https://www.figma.com/design/G7m51hNwXbH4waopOEASe7/Ead-Skill?m=auto&t=pcJ5DPmtyewiBj31-6)
