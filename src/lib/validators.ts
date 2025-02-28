@@ -9,6 +9,7 @@ export type LoginProps = z.infer<typeof LoginSchema>
 
 
 export const CourseDataSchema = z.object({
+  id: z.number(),
   title: z.string().min(1),
   price: z.number().min(1),
   rating: z.number().min(1),
