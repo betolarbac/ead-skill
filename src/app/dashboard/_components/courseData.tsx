@@ -75,11 +75,17 @@ export default function CourseData({ data }: CourseData) {
     {
       accessorKey: "title",
       header: "Curso",
-      cell: ({ row }) => (
-        <div className="capitalize font-medium px-2 py-4">
-          {row.getValue("title")}
-        </div>
-      ),
+      cell: ({ row }) => {
+        const title = row.getValue("title") as string;
+        const truncatedTitle =
+          title.length > 30 ? title.slice(0, 30) + "..." : title;
+
+        return (
+          <div className="capitalize font-medium px-2 py-4 truncate max-w-[200px]">
+            {truncatedTitle}
+          </div>
+        );
+      },
     },
     {
       accessorKey: "category",
@@ -144,7 +150,7 @@ export default function CourseData({ data }: CourseData) {
     },
     {
       id: "actions",
-      header: "Ações",
+      header: () => <div className="text-end pr-2">Ações</div>,
       cell: ({}) => {
         return (
           <div className="flex justify-end gap-2">
@@ -189,7 +195,7 @@ export default function CourseData({ data }: CourseData) {
   return (
     <div className="w-full">
       <div className="flex row justify-between gap-4 mt-4">
-        <div className="relative">
+        <div className="relative flex-1/2">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             placeholder="Buscar Curso..."
@@ -271,7 +277,7 @@ export default function CourseData({ data }: CourseData) {
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  Sem Cursos cadastrados
+                  Sem Cursos Encontrados
                 </TableCell>
               </TableRow>
             )}
