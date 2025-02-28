@@ -118,13 +118,13 @@ export const columnsData: ColumnDef<CourseDataProps>[] = [
     cell: ({}) => {
       return (
         <div className="flex justify-end gap-2">
-          <Button variant="outline" size="icon">
+          <Button variant="outline" size="icon" className="cursor-pointer">
             <Eye className="h-4 w-4" />
           </Button>
-          <Button variant="outline" size="icon">
+          <Button variant="outline" size="icon" className="cursor-pointer">
             <Pencil className="h-4 w-4" />
           </Button>
-          <Button variant="outline" size="icon">
+          <Button variant="outline" size="icon" className="cursor-pointer">
             <Trash2 className="h-4 w-4" />
           </Button>
         </div>
