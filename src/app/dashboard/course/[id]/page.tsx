@@ -1,9 +1,9 @@
 import React from "react";
 import { GetCourseData } from "./action";
-import { Zap } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import BackButton from "../_components/backButton";
+import CourseRelevant from "../../_components/courseRelevant";
 
 export default async function CoursePage({params,}: {params: { id: string };}) {
   const {id } = await params;
@@ -20,12 +20,10 @@ export default async function CoursePage({params,}: {params: { id: string };}) {
 
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center justify-between">
-            <h3>{courseDetails?.title}</h3>
+          <CardTitle className="flex items-center">
+            <h3 className="mr-2">{courseDetails?.title}</h3>
             {courseDetails.rating.rate >= 4.5 ? (
-            <div className="bg-black w-fit p-0.5 rounded-[4px]">
-              <Zap className="text-yellow-300 w-6 h-6" />
-            </div>
+            <CourseRelevant />
           ) : null}
           </CardTitle>
         </CardHeader>

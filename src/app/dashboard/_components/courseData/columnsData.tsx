@@ -2,11 +2,12 @@
 import { Button } from "@/components/ui/button";
 import { CourseDataProps } from "@/lib/validators";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, Zap } from "lucide-react";
+import { ArrowUpDown } from "lucide-react";
 import Image from "next/image";
 import DetailsButton from "./detailsButton";
 import { DeleteCourse } from "./deleteCourse";
 import EditButton from "./editButton";
+import CourseRelevant from "../courseRelevant";
 
 export const columnsData: ColumnDef<CourseDataProps>[] = [
   {
@@ -38,11 +39,7 @@ export const columnsData: ColumnDef<CourseDataProps>[] = [
           <div className="capitalize font-medium px-2 py-4 truncate max-w-[200px]">
             {truncatedTitle}
           </div>
-          {rating.rate >= 4.5 ? (
-            <div className="bg-black w-fit p-0.5 rounded-[4px]">
-              <Zap className="text-yellow-300 w-4 h-4" />
-            </div>
-          ) : null}
+          {rating.rate >= 4.5 ? <CourseRelevant /> : null}
         </div>
       );
     },
