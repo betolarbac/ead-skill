@@ -20,7 +20,15 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronDown, ChevronLeft, ChevronRight, Search } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Eye,
+  Pencil,
+  Search,
+  Trash2,
+} from "lucide-react";
 import {
   Table,
   TableBody,
@@ -31,6 +39,15 @@ import {
 } from "@/components/ui/table";
 import { CourseDataProps } from "@/lib/validators";
 import Image from "next/image";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 type CourseData = {
   data: CourseDataProps[];
@@ -115,6 +132,25 @@ export default function CourseData({ data }: CourseData) {
         );
       },
     },
+    {
+      id: "actions",
+      header: "Ações",
+      cell: ({}) => {
+        return (
+          <div className="flex justify-end gap-2">
+            <Button variant="outline" size="icon">
+              <Eye className="h-4 w-4" />
+            </Button>
+            <Button variant="outline" size="icon">
+              <Pencil className="h-4 w-4" />
+            </Button>
+            <Button variant="outline" size="icon">
+              <Trash2 className="h-4 w-4" />
+            </Button>
+          </div>
+        );
+      },
+    },
   ];
 
   const table = useReactTable({
@@ -142,7 +178,7 @@ export default function CourseData({ data }: CourseData) {
   });
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
         <div className="relative">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
@@ -151,9 +187,32 @@ export default function CourseData({ data }: CourseData) {
             onChange={(event) =>
               table.getColumn("title")?.setFilterValue(event.target.value)
             }
-            className="max-w-sm pl-8"
+            className="max-w-sm pl-8 rounded-sm"
           />
         </div>
+        <Select
+          value={
+            (table.getColumn("category")?.getFilterValue() as string) ?? ""
+          }
+          onValueChange={(e) => table.getColumn("category")?.setFilterValue(e)}
+        >
+          <SelectTrigger className="p-2 border rounded-sm">
+            <SelectValue placeholder="Selecione uma Categoria" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Categorias</SelectLabel>
+              {Array.from(new Set(data.map((item) => item.category))).map(
+                (category) => (
+                  <SelectItem key={category} value={category}>
+                    {category}
+                  </SelectItem>
+                )
+              )}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
@@ -181,7 +240,7 @@ export default function CourseData({ data }: CourseData) {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-sm border mt-6">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
