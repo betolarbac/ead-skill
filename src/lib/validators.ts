@@ -12,7 +12,10 @@ export const CourseDataSchema = z.object({
   id: z.number(),
   title: z.string().min(1),
   price: z.number().min(1),
-  rating: z.number().min(1),
+  rating: z.object({
+    rate: z.number().min(1),
+    count: z.number().min(1),
+  }),
   description: z.string().min(1),
   image: z.string().min(1),
   category: z.string(),
