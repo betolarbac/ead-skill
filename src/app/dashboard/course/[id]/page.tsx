@@ -1,7 +1,6 @@
 import React from "react";
 import { GetCourseData } from "./action";
-import { Button } from "@/components/ui/button";
-import { Edit, Zap } from "lucide-react";
+import { Zap } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import BackButton from "../_components/backButton";
@@ -17,10 +16,6 @@ export default async function CoursePage({params,}: {params: { id: string };}) {
           <BackButton />
           <h1 className="text-2xl font-bold">Detalhes do Curso</h1>
         </div>
-        <Button >
-          <Edit className="h-4 w-4 mr-2" />
-          Editar Curso
-        </Button>
       </div>
 
       <Card>
