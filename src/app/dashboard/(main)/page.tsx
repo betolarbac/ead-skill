@@ -1,4 +1,4 @@
-import CourseData from "../_components/courseData";
+import CourseData from "../_components/courseData/courseData";
 import { GetCourse } from "./action";
 
 export default async function Dashboard() {
