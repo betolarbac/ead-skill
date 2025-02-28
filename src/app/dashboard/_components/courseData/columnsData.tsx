@@ -2,8 +2,9 @@
 import { Button } from "@/components/ui/button";
 import { CourseDataProps } from "@/lib/validators";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, Eye, Pencil, Trash2, Zap } from "lucide-react";
+import { ArrowUpDown,  Pencil, Trash2, Zap } from "lucide-react";
 import Image from "next/image";
+import DetailsButton from "./detailsButton";
 
 export const columnsData: ColumnDef<CourseDataProps>[] = [
   {
@@ -115,12 +116,10 @@ export const columnsData: ColumnDef<CourseDataProps>[] = [
   {
     id: "actions",
     header: () => <div className="text-end pr-2">Ações</div>,
-    cell: ({}) => {
+    cell: ({row}) => {
       return (
         <div className="flex justify-end gap-2">
-          <Button variant="outline" size="icon" className="cursor-pointer">
-            <Eye className="h-4 w-4" />
-          </Button>
+          <DetailsButton id={Number(row.original.id)} />
           <Button variant="outline" size="icon" className="cursor-pointer">
             <Pencil className="h-4 w-4" />
           </Button>
