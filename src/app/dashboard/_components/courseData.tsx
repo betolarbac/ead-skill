@@ -15,13 +15,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
-  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Eye,
@@ -178,7 +171,7 @@ export default function CourseData({ data }: CourseData) {
   });
   return (
     <div className="w-full">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+      <div className="flex row justify-between gap-4 mt-4">
         <div className="relative">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
@@ -194,14 +187,15 @@ export default function CourseData({ data }: CourseData) {
           value={
             (table.getColumn("category")?.getFilterValue() as string) ?? ""
           }
-          onValueChange={(e) => table.getColumn("category")?.setFilterValue(e)}
+          onValueChange={(e) => table.getColumn("category")?.setFilterValue(e === "all" ? undefined : e)}
         >
-          <SelectTrigger className="p-2 border rounded-sm">
+          <SelectTrigger className="p-2 border rounded-sm w-auto cursor-pointer gap-4">
             <SelectValue placeholder="Selecione uma Categoria" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Categorias</SelectLabel>
+              <SelectItem value="all">Todos os Cursos</SelectItem>
               {Array.from(new Set(data.map((item) => item.category))).map(
                 (category) => (
                   <SelectItem key={category} value={category}>
@@ -212,33 +206,6 @@ export default function CourseData({ data }: CourseData) {
             </SelectGroup>
           </SelectContent>
         </Select>
-
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
       </div>
       <div className="rounded-sm border mt-6">
         <Table>
