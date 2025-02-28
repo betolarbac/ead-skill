@@ -2,9 +2,10 @@
 import { Button } from "@/components/ui/button";
 import { CourseDataProps } from "@/lib/validators";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown,  Pencil, Trash2, Zap } from "lucide-react";
+import { ArrowUpDown,  Pencil, Zap } from "lucide-react";
 import Image from "next/image";
 import DetailsButton from "./detailsButton";
+import { DeleteCourse } from "./deleteCourse";
 
 export const columnsData: ColumnDef<CourseDataProps>[] = [
   {
@@ -123,9 +124,7 @@ export const columnsData: ColumnDef<CourseDataProps>[] = [
           <Button variant="outline" size="icon" className="cursor-pointer">
             <Pencil className="h-4 w-4" />
           </Button>
-          <Button variant="outline" size="icon" className="cursor-pointer">
-            <Trash2 className="h-4 w-4" />
-          </Button>
+          <DeleteCourse id={Number(row.original.id)} />
         </div>
       );
     },
