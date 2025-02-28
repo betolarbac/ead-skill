@@ -22,6 +22,7 @@ import {
   Pencil,
   Search,
   Trash2,
+  Zap,
 } from "lucide-react";
 import {
   Table,
@@ -48,7 +49,9 @@ type CourseData = {
 };
 
 export default function CourseData({ data }: CourseData) {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [sorting, setSorting] = React.useState<SortingState>([
+    { id: "rating", desc: true },
+  ]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
@@ -79,10 +82,18 @@ export default function CourseData({ data }: CourseData) {
         const title = row.getValue("title") as string;
         const truncatedTitle =
           title.length > 30 ? title.slice(0, 30) + "..." : title;
+        const rating = row.getValue("rating") as { rate: number };
 
         return (
-          <div className="capitalize font-medium px-2 py-4 truncate max-w-[200px]">
-            {truncatedTitle}
+          <div className="flex items-center">
+            <div className="capitalize font-medium px-2 py-4 truncate max-w-[200px]">
+              {truncatedTitle}
+            </div>
+            {rating.rate >= 4.5 ? (
+              <div className="bg-black w-fit p-0.5 rounded-[4px]">
+                <Zap className="text-yellow-300 w-4 h-4" />
+              </div>
+            ) : null}
           </div>
         );
       },
@@ -122,6 +133,13 @@ export default function CourseData({ data }: CourseData) {
     {
       accessorKey: "rating",
       header: "Avaliação",
+      sortingFn: (rowA, rowB, columnId) => {
+        const ratingA =
+          (rowA.getValue(columnId) as { rate: number })?.rate || 0;
+        const ratingB =
+          (rowB.getValue(columnId) as { rate: number })?.rate || 0;
+        return ratingA - ratingB;
+      },
       cell: ({ row }) => {
         const rating = row.getValue("rating") as { rate: number };
 
